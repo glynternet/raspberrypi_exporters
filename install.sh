@@ -27,8 +27,13 @@ install-timer-files() {
 enable-services() {
 	local apps="${1:?must provide apps}"
 	for app in $apps; do
-		echo "Enabling $app"
-		sudo systemctl enable "$app";
+		if [[ -f "/etc/systemd/system/$app.timer" ]]; then
+			local systemUnit="$app.timer"
+		else
+			local systemUnit="$app.service"
+		fi
+		echo "Enabling $systemUnit"
+		sudo systemctl enable "$systemUnit";
 	done
 }
 
