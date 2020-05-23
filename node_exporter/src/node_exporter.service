@@ -3,7 +3,7 @@ Description=node_exporter service
 
 [Service]
 Type=simple
-ExecStart=/opt/apps/raspberrypi_exporters/node_exporter/node_exporter --collector.textfile.directory /opt/apps/raspberrypi_exporters/node_exporter/textfile_collector
+ExecStart=/opt/apps/raspberrypi_exporters/node_exporter/node_exporter --collector.textfile.directory /tmp/textfile-collector
 
 [Install]
 WantedBy=multi-user.target
