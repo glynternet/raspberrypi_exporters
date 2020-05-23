@@ -26,7 +26,10 @@ install-timer-files() {
 
 enable-services() {
 	local apps="${1:?must provide apps}"
-	for app in $apps; do sudo systemctl enable "$app"; done
+	for app in $apps; do
+		echo "Enabling $app"
+		sudo systemctl enable "$app";
+	done
 }
 
 apps="$(find * -maxdepth 0 -type d | tr '\n' ' ')"
