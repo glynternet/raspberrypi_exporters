@@ -8,7 +8,7 @@ install-service-files() {
 			echo "Skipping service install: No service for app:$app."
 			continue
 		fi
-		sudo mv -v "$appService" /etc/systemd/system/;
+		mv -v "$appService" /etc/systemd/system/;
 	done
 }
 
@@ -20,7 +20,7 @@ install-timer-files() {
 			echo "Skipping timer install: No timer for app:$app."
 			continue
 		fi
-		sudo mv -v "$appTimer" /etc/systemd/system/;
+		mv -v "$appTimer" /etc/systemd/system/;
 	done
 }
 
@@ -33,7 +33,7 @@ enable-services() {
 			local systemUnit="$app.service"
 		fi
 		echo "Enabling $systemUnit"
-		sudo systemctl enable "$systemUnit";
+		systemctl enable "$systemUnit";
 	done
 }
 
@@ -46,7 +46,7 @@ start-services() {
 			local systemUnit="$app.service"
 		fi
 		echo "Enabling $systemUnit"
-		sudo systemctl start "$systemUnit";
+		systemctl start "$systemUnit";
 	done
 }
 
@@ -54,6 +54,6 @@ apps="$(find * -maxdepth 0 -type d | tr '\n' ' ')"
 echo "Apps to install: $apps"
 install-service-files "$apps"
 install-timer-files "$apps"
-sudo systemctl daemon-reload
+systemctl daemon-reload
 enable-services "$apps"
 start-services "$apps"
